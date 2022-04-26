@@ -1,0 +1,22 @@
+.signupContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    /* border: 2px solid black; */
+    width: 100%;
+    height: 100%;
+
+}
+
+.signup-textfield {
+    width: 100%;
+}
+
+
+.signupButton {
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
