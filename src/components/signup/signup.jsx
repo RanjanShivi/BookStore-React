@@ -6,7 +6,8 @@ import {userSignup} from '../service/userservice'
 import '../signup/signup.css'
 
 const fullNameRegex = /^[a-zA-Z]{2,40}( [a-zA-Z]{2,40})+$/;
-const mobNumRegex = /^([+]\d{2})? \d{10}$/;
+// const mobNumRegex = /^([+]\d{2})? \d{10}$/;
+const mobNumRegex = /((\+*)((0[ -]*)*|((91 )*))((\d{12})+|(\d{10})+))|\d{5}([- ]*)\d{6}/;
 const emailRegex = /^[a-zA-Z]+[a-zA-Z0-9]*[- . + _]?[a-zA-Z0-9]+[@]{1}[a-z0-9]+[.]{1}[a-z]+[.]?[a-z]+$/;
 const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&-+=()])([a-zA-Z0-9]*).{8,}$/;
 

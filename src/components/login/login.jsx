@@ -3,6 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import '../login/login.css';
+import { userLogin } from "../service/userservice";
 
 
 const emailRegex = /^[a-zA-Z]+[a-zA-Z0-9]*[- . + _]?[a-zA-Z0-9]+[@]{1}[a-z0-9]+[.]{1}[a-z]+[.]?[a-z]+$/;
@@ -40,6 +41,15 @@ function Login() {
     else{
          setpasswordErr(true);
          setpasswordHelper("Enter correct password")
+    }
+    if(emailTestRegex==true && passwordTestRegex==true){
+        userLogin(loginObj).then((res)=>{
+            console.log(res);
+            localStorage.setItem('token', res.data.token);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
     }
     }
     return (
