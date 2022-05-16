@@ -12,65 +12,78 @@ const passwordRegex = /^(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&-+=()])([a-zA-Z0-9]*).
 
 
 function Login() {
-    
-    const[loginObj, setloginObj] = React.useState({email:'', password:''});
-    const emailTestRegex = emailRegex.test(loginObj.email)
-    const passwordTestRegex = passwordRegex.test(loginObj.password)
+
+    const [loginObj, setloginObj] = React.useState({ email: '', password: '' });
 
     const [emailErr, setemailErr] = React.useState(false);
     const [emailHelper, setemailHelper] = React.useState('');
-    
+
     const [passwordErr, setpasswordErr] = React.useState(false);
     const [passwordHelper, setpasswordHelper] = React.useState('');
-    
-    const handleOnClick=()=>{
-    if(emailTestRegex==true){
-        setemailErr(false);
-        setemailHelper('')
-    }
-    else{
-        setemailErr(true);
-        setemailHelper("Enter correct email")
+
+    const takeEmail = (event) => {
+        setloginObj({ ...loginObj, email: event.target.value })
     }
 
-    if(passwordTestRegex==true){
-        setpasswordErr(false);
-        setpasswordHelper('')
+    const takePassword = (event) => {
+        setloginObj({ ...loginObj, password: event.target.value })
     }
 
-    else{
-         setpasswordErr(true);
-         setpasswordHelper("Enter correct password")
-    }
-    if(emailTestRegex==true && passwordTestRegex==true){
-        userLogin(loginObj).then((res)=>{
+  
+
+    const handleOnClick = () => {
+
+        const emailTestRegex = emailRegex.test(loginObj.email)
+        const passwordTestRegex = passwordRegex.test(loginObj.password)
+       
+        if (emailTestRegex == true) {
+
+            setemailErr(false);
+            setemailHelper('')
+        }
+        else {
+            setemailErr(true);
+            setemailHelper("Enter correct email")
+        }
+
+        if (passwordTestRegex == true) {
+            setpasswordErr(false);
+            setpasswordHelper('')
+        }
+
+        else {
+            setpasswordErr(true);
+            setpasswordHelper("Enter correct password")
+        }
+        if(emailTestRegex==true && passwordTestRegex==true){
+        userLogin(loginObj).then((res) => {
             console.log(res);
-            localStorage.setItem('token', res.data.token);
+            localStorage.setItem('token', res.data.data);
         })
-        .catch((error)=>{
-            console.log(error);
-        })
-    }
+            .catch((error) => {
+                console.log(error);
+            })
+        }
     }
     return (
-         <Box className="loginContainer">
-   
-            
-            <TextField id="outlined-basic" className="textfield" label="email" variant="outlined" size="small" error={emailErr} helperText={emailHelper}></TextField>
+        <Box className="loginContainer">
+
+
+            <TextField id="outlined-basic" className="textfield" label="email" variant="outlined" size="small" error={emailErr} helperText={emailHelper} onChange={takeEmail}></TextField>
             <Box className="passwordBox">
-            <TextField id="outlined-basic" className="textfield" label="password" variant="outlined" size="small" error={passwordErr} helperText={passwordHelper}></TextField>
-            <span className="forgetPassword">Forget Password?</span>
+                <TextField id="outlined-basic" className="textfield" label="password" variant="outlined" size="small" error={passwordErr} helperText={passwordHelper} onChange={takePassword}></TextField>
+                <span className="forgetPassword">Forget Password?</span>
             </Box>
-            <Button className="loginButton" sx={{backgroundColor: 'brown', color:'white'}} onClick={handleOnClick}>LOGIN</Button>  
+            <Button className="loginButton" sx={{ backgroundColor: 'brown', color: 'white' }} onClick={handleOnClick}>LOGIN</Button>
 
             -----------------OR-----------------
 
             <Box className="loginOptionButton">
-                <Button className="facebookButton" variant="contained" sx={{backgroundColor: '#4266B2'}}
+                <Button className="facebookButton" variant="contained" sx={{ backgroundColor: '#4266B2' }}
                 >Facebook</Button>
-                <Button className="googleButton" variant="contained" sx={{backgroundColor: '#F5F5F5', color: 'black'}}>Google</Button>
-            </Box> 
-         </Box>
+                <Button className="googleButton" variant="contained" sx={{ backgroundColor: '#F5F5F5', color: 'black' }}>Google</Button>
+            </Box>
+        </Box>
     )
 }
 export default Login

@@ -1,31 +1,36 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
 import bookCoverImg from '../../assests/bookCover.png';
 import Box from '@mui/material/Box';
 import './bookcard.css';
+import { PropaneSharp } from '@mui/icons-material';
 
 export default function BookCard(prop) {
+
+    const onClickingBookCard = (details)=>{
+        prop.listenToBookDetail(details);
+    }
+
     return (
-        <Box className='card-container'>
-            <Card sx={{width: '100%', height: '100%'}}>
-                <img src={bookCoverImg} alt="err" style={{paddingLeft: '3rem', width: '160px', height: '200px'}}/>
-                   
-                    <CardContent >
-                        <Typography gutterBottom variant="h5" component="div">
+        <Box className='card-container' onClick={()=> onClickingBookCard(prop.singleBook)} >
+            <Card sx={{width: '100%', height: '100%'}} onClick={onClickingBookCard}>
+                <Box className='bookcard-img-container'>
+                <img src={bookCoverImg} alt="err" style={{width: '50%', height: '80%'}}/>
+                </Box> 
+                    <CardContent onClick={onClickingBookCard}>
+                        <Typography gutterBottom component="div" style={{font: 'normal normal bold 18px Roboto'}}>
                             {prop.singleBook.bookName}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography color="text.secondary" style={{font: 'normal normal 14px Roboto'}}>
                             by {prop.singleBook.author}
                         </Typography>
-                        <Typography variant="body2" color="text.secondary">
+                        <Typography color="text.secondary" style={{font: 'normal normal 14px Roboto'}}>
                             4.3*({prop.singleBook.quantity})
                         </Typography>
                         
-                        <Typography gutterBottom variant="h5" component="div">
+                        <Typography gutterBottom component="div" style={{font: 'normal normal bold 16px Roboto'}}>
                             Rs. {prop.singleBook.discountedPrice}
                         </Typography>
                     </CardContent>

@@ -2,13 +2,23 @@ import React from "react";
 import Header from "../../components/header/header";
 import SubHeader from "../../components/subheader/subheader";
 import BookCard from "../../components/bookcard/bookcard";
-import { Grid } from "@mui/material";
+import { Container, Grid } from "@mui/material";
 import { getAllBooks } from "../../components/service/bookservice";
 import './homepage.css';
-import { Box } from "@mui/system";
+import BookDetail from "../../components/bookdetail/bookdetail";
+import { Book } from "@mui/icons-material";
+import Box from '@mui/material/Box';
 
 function HomePage() {
   const [books, setBooks] = React.useState([]);
+  const [view, setView] = React.useState(false)
+  const [bookDetails, setBookDetails] = React.useState([])
+
+
+  const listenToBookDetail = (details) => {
+    setView(true)
+    setBookDetails(details)
+  }
 
   React.useEffect(() => {
     getBooks();
@@ -27,19 +37,30 @@ function HomePage() {
   return (
     <>
       <Header />
-      <Grid container className="grid-container" spacing={2}>
-        <Grid item xs={12}>
-          <SubHeader NumOfBooks={books.length} />
-        </Grid>
-        {
-          books.map((singleBook) => (
-            <Grid item xs={2}>
-              <BookCard singleBook={singleBook} />
-            </Grid>
-          ))
+      {view ? <BookDetail bookDetails={bookDetails} /> :
+       
+          
+            <Grid container style={{ width: '70%', marginLeft: '14%', marginTop: '10px'}}
+              direction="row"
+              justifyContent="flex-start"
+              spacing={2}>
+                
+              <Grid item xs={12}>
+                <SubHeader NumOfBooks={books.length} />
+              </Grid>
 
-        }
-      </Grid>
+              {
+                books.map((singleBook) => (
+                  <Grid item xs={3}>
+                    <BookCard singleBook={singleBook} listenToBookDetail={listenToBookDetail} />
+                  </Grid>
+                ))
+
+              }
+            </Grid>
+           
+        
+      }
     </>
   )
 }

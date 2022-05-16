@@ -1,0 +1,108 @@
+.outer-container{
+    /* border: 1px solid black; */
+    width: 100vw;
+    height: 90vh;
+    background-color: white;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    top:40px;
+}
+.book-details-container{
+    /* border: 1px solid black; */
+    width: 70%;
+    height: 60%;
+     display: flex;
+    justify-content: space-between;
+}
+.book-cover-box{
+    /* border: 1px solid black; */
+    width: 30%;
+    height: 100%;
+     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.img-card{
+    width: 100%;
+    height: 85%;
+}
+.img-box{
+    /* border: 1px solid gray; */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-box{
+    /* border: 1px solid black; */
+    width: 100%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end; 
+}
+
+.quantity-box{
+/* border: 1px solid black; */
+width: 47%; 
+height: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+    
+}
+.number-box{
+    width: 40%;
+    height: 75%;
+    border: 2px solid gray;
+    border-radius: 7%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+    font-size: large;
+}
+.cart-button{
+    border: none;
+    outline: none;
+    width: 47%;
+    background-color: brown;
+    color: white;
+}
+
+.wishlist-button{
+    border: none;
+    outline: none;
+    width: 47%;
+    background-color: rgb(84, 83, 83);
+    color: white;
+}
+
+.book-detail-box{
+    /* border: 1px solid black; */
+    width: 62%;
+    height: 100%;
+     display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
+.detail-box-one{
+    border-bottom: 1px solid gray;
+    width: 100%;
+    height: 30%;
+   }
+.detail-box-two{
+    border-bottom: 1px solid gray;
+    width: 100%;
+    height: 30%;
+}
+.detail-box-three{
+    border-bottom: 1px solid gray;
+    width: 100%;
+    height: 30%;
+}
+

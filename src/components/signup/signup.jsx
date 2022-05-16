@@ -24,7 +24,7 @@ function SignUp(){
     const[mobNumErr, setmobNumErr] = React.useState(false);
     const[mobNumHelper, setmobNumHelper] = React.useState('');
 
-    const[signupObj, setsignupObj] = React.useState({fullName:'', email:'', password:'', mobNumber:''});
+    const[signupObj, setsignupObj] = React.useState({fullName:'', email:'', password:'', mobileNum:''});
 
     function takename(event) {
         setsignupObj({...signupObj,fullName:event.target.value})
@@ -36,13 +36,13 @@ function SignUp(){
         setsignupObj({...signupObj,password:event.target.value})
     }
     function takeMobNum(event) {
-        setsignupObj({...signupObj,mobNumber:event.target.value})
+        setsignupObj({...signupObj,mobileNum:event.target.value})
     }
    
     const nameTestRegex = fullNameRegex.test(signupObj.fullName)
     const emailTestRegex = emailRegex.test(signupObj.email)
     const passwordTestRegex = passwordRegex.test(signupObj.password)
-    const mobNumTestRegex = mobNumRegex.test(signupObj.mobNumber)
+    const mobNumTestRegex = mobNumRegex.test(signupObj.mobileNum)
 
     function handleOnSubmit(){
         if(nameTestRegex==true){
