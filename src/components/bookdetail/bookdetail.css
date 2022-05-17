@@ -4,9 +4,17 @@
     height: 90vh;
     background-color: white;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
     position: relative;
-    top:40px;
+    top:30px;
+}
+.book-details-header{
+    /* border: 1px solid black; */
+    width: 70%;
+    height: 7vh;
+
 }
 .book-details-container{
     /* border: 1px solid black; */

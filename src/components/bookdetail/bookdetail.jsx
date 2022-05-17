@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import './bookdetail.css';
+import './bookdetail.css'
 import bookCoverImg from '../../assests/bookCover.png';
 import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
@@ -8,10 +8,13 @@ import { getBookInCart, addBookInCart, addBookInWishlist } from '../service/book
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Card from '@mui/material/Card';
+// import {useHistory } from 'react-router-dom';
 
 
 function BookDetail(prop) {
+    // let history = useHistory();
     console.log('prop', prop)
+
     const [bookFilter, setBookFilter] = React.useState([])
     const [bookInCart, setBookInCart] = React.useState(false)
     const [quantity, setQuantity] = React.useState(0)
@@ -44,7 +47,7 @@ function BookDetail(prop) {
     }
 
     console.log('line41', bookFilter)
-  
+
     const handleCart = () => {
         addBookInCart(prop.bookDetails._id).then((res) => {
             console.log(res.data.data)
@@ -71,11 +74,21 @@ function BookDetail(prop) {
                 console.log(error);
             })
     }
+    // const onClickingHome = ()=>{
+    //     history.push("/Home")
+    // }
 
 
     return (
         <Box className='outer-container'>
-
+            <Box className='book-details-header'>
+                <Typography component="span" color="text.secondary" style={{font: 'normal normal 14px Roboto'}} >
+                    Home{ }/{ }
+                </Typography>
+                <Typography component="span" style={{font: 'normal normal bold 14px Roboto'}}>
+                    (Book())
+                </Typography>
+            </Box>
             <Box className='book-details-container'>
 
                 <Box className='book-cover-box'>
@@ -86,15 +99,15 @@ function BookDetail(prop) {
                     </Card>
                     <Box className='button-box'>
                         {
-                            bookInCart ? 
+                            bookInCart ?
                                 <Box className='quantity-box'>
-                                
-                                    <RemoveCircleOutlineIcon  fontSize='large' onClick={handleMinus} style={{cursor: 'pointer', color: 'gray'}}/>
+
+                                    <RemoveCircleOutlineIcon fontSize='large' onClick={handleMinus} style={{ cursor: 'pointer', color: 'gray' }} />
                                     <Box className='number-box'>{quantity}</Box>
-                                    <AddCircleOutlineIcon fontSize='large' onClick={handlePlus} style={{cursor: 'pointer', color: 'gray'}}/>
-                                
-                            </Box>
-                            
+                                    <AddCircleOutlineIcon fontSize='large' onClick={handlePlus} style={{ cursor: 'pointer', color: 'gray' }} />
+
+                                </Box>
+
                                 :
                                 <Button variant="contained" className='cart-button' style={{ backgroundColor: 'brown' }} onClick={handleCart}>Add to bag</Button>
                         }
