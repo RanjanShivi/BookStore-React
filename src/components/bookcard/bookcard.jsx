@@ -8,7 +8,7 @@ import './bookcard.css';
 import { PropaneSharp } from '@mui/icons-material';
 
 export default function BookCard(prop) {
-
+console.log('props', prop)
     const onClickingBookCard = (details)=>{
         prop.listenToBookDetail(details);
     }

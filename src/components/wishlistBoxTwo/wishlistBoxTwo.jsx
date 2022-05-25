@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, } from "@mui/system";
+import { Box } from "@mui/system";
 import { Typography } from "@mui/material";
 import './wishlistBoxTwo.css';
 import bookCoverImg from '../../assests/bookCover.png';
@@ -8,9 +8,10 @@ import { deleteBookInWishlist } from "../service/bookservice";
 
 
 function WishlistBoxTwo(props) {
-
+    console.log('props', props)
+   
     const handleDelete = () => {
-        deleteBookInWishlist()
+        deleteBookInWishlist(props.singleBook.bookId)
             .then((res) => {
                 console.log(res);
 
@@ -27,13 +28,13 @@ function WishlistBoxTwo(props) {
                 </Box>
                 <Box className='wishlist-details-container'>
                     <Typography gutterBottom variant="h5" component="div">
-                        {props.singlebook.bookName}
+                        {props.singleBook.bookName}
                     </Typography>
                     <Typography variant="body2" color="text.secondary">
-                        {props.singlebook.author}
+                        {props.singleBook.author}
                     </Typography>
                     <Typography gutterBottom variant="h5" component="div">
-                        Rs. {props.singlebook.discountedPrice}
+                        Rs. {props.singleBook.price}
                     </Typography>
                 </Box>
 

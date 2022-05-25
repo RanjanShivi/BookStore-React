@@ -5,9 +5,16 @@ import educationImg from '../../assests/education.png';
 import SearchIcon from '@mui/icons-material/Search';
 import PermIdentityOutlinedIcon from '@mui/icons-material/PermIdentityOutlined';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-
+import { useHistory } from "react-router-dom";
 
 function Header() {
+
+const history = useHistory();
+
+const onClickingCart =()=>{
+    history.push("/Cart")
+}
+
     return (
         <Box className="header">
             <Box className="header-container">
@@ -26,8 +33,8 @@ function Header() {
                         <PermIdentityOutlinedIcon htmlColor="white"/>
                         <span className="imgText">Profile</span>
                     </Box>
-                    <Box className="cart-box">
-                        <ShoppingCartOutlinedIcon htmlColor="white"/>
+                    <Box className="cart-box" >
+                        <ShoppingCartOutlinedIcon htmlColor="white" onClick={onClickingCart}/>
                         <span className="imgText">Cart</span>
                     </Box>
                 </Box>

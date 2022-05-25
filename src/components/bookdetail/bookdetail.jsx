@@ -4,20 +4,20 @@ import './bookdetail.css'
 import bookCoverImg from '../../assests/bookCover.png';
 import { Button } from '@mui/material';
 import Typography from '@mui/material/Typography';
-import { getBookInCart, addBookInCart, addBookInWishlist } from '../service/bookservice'
+import { getBookInCart, addBookInCart, addBookInWishlist, updateBookInCart } from '../service/bookservice'
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 import Card from '@mui/material/Card';
-// import {useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 
 function BookDetail(prop) {
-    // let history = useHistory();
+    let history = useHistory();
     console.log('prop', prop)
 
     const [bookFilter, setBookFilter] = React.useState([])
     const [bookInCart, setBookInCart] = React.useState(false)
-    const [quantity, setQuantity] = React.useState(0)
+    const [quantity, setQuantity] = React.useState(1)
 
     React.useEffect(() => {
         getCartBooks();
@@ -34,6 +34,7 @@ function BookDetail(prop) {
                 if (books.bookId == prop.bookDetails._id) {
 
                     setBookInCart(true)
+                    setQuantity(books.quantity)
                     console.log(bookInCart)
                     return books
                 }
@@ -47,6 +48,7 @@ function BookDetail(prop) {
     }
 
     console.log('line41', bookFilter)
+    console.log('line42', quantity)
 
     const handleCart = () => {
         addBookInCart(prop.bookDetails._id).then((res) => {
@@ -60,32 +62,56 @@ function BookDetail(prop) {
     }
 
     const handlePlus = () => {
-        setQuantity(quantity + 1)
-    }
+        let body = {
+            quantity: quantity + 1
+        }
+        updateBookInCart(prop.bookDetails._id, body).then((res) => {
 
-    const handleMinus = () => {
-        setQuantity(quantity - 1)
-    }
-    const handleWishlist = () => {
-        addBookInWishlist(prop.bookDetails._id).then((res) => {
             console.log(res.data.data)
+            getCartBooks()
+            setBookInCart(true)
+            console.log(bookInCart)
         })
             .catch((error) => {
                 console.log(error);
             })
     }
-    // const onClickingHome = ()=>{
-    //     history.push("/Home")
-    // }
+
+    const handleMinus = () => {
+        let body = {
+            quantity: quantity - 1
+        }
+        updateBookInCart(prop.bookDetails._id, body).then((res) => {
+            console.log(res.data.data)
+            getCartBooks()
+            setBookInCart(true)
+            console.log(bookInCart)
+        })
+            .catch((error) => {
+                console.log(error);
+            })
+    }
+    const handleWishlist = () => {
+        addBookInWishlist(prop.bookDetails._id).then((res) => {
+            console.log(res.data.data)
+                   })
+            .catch((error) => {
+                console.log(error);
+            })
+            history.push("/Wishlist")
+    }
+    const onClickingHome = () => {
+        history.push("/Home")
+    }
 
 
     return (
         <Box className='outer-container'>
             <Box className='book-details-header'>
-                <Typography component="span" color="text.secondary" style={{font: 'normal normal 14px Roboto'}} >
-                    Home{ }/{ }
+                <Typography component="span" color="text.secondary" style={{ font: 'normal normal 14px Roboto', cursor: 'pointer' }} onClick={onClickingHome}>
+                    Home / { }
                 </Typography>
-                <Typography component="span" style={{font: 'normal normal bold 14px Roboto'}}>
+                <Typography component="span" style={{ font: 'normal normal bold 14px Roboto' }}>
                     (Book())
                 </Typography>
             </Box>
